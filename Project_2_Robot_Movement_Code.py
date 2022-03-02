@@ -5,29 +5,30 @@ class TangoBot:
 
     #initializes robot
     def __init__(self):
-##        try:
-##            self.usb = serial.Serial('/dev/ttyACM0')
-##            print(self.usb.name)
-##            print(self.usb.baudrate)
-##        except:
-##            try:
-##                self.usb = serial.Serial('/dev/ttyACM0')
-##                print(self.usb.name)
-##                print(self.usb.baudrate)
-##            except:
-##                print("No servo serial ports found")
-##                sys.exit(0)
+        try:
+            self.usb = serial.Serial('/dev/ttyACM0')
+            print(self.usb.name)
+            print(self.usb.baudrate)
+        except:
+            try:
+                self.usb = serial.Serial('/dev/ttyACM1')
+                print(self.usb.name)
+                print(self.usb.baudrate)
+            except:
+                print("No servo serial ports found")
+                sys.exit(0)
 
         #movement
-        target = 5896
+        target = 4500
         #least significant bit
         lsb = target &0x7F
         #most significant bit
         msb = (target >> 7) &0x7F
 
-        
-        cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x05) + chr(lsb) + chr(msb)
-
+        cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x02) + chr(lsb) + chr(msb)
+        print('reading')
+        self.usb.write(cmd.encode())
+        print('writing')
         #touch screen
         #motors
         #servos
@@ -36,8 +37,7 @@ class TangoBot:
 
     def moveForward(self, key):
         print("moving forward")
-        self.makeCommand(6700, 0x01)
-        
+        self.makeCommand(4200, 0x01)
 
     def moveReverse(self, key):
         print("moving reverse")
@@ -62,13 +62,13 @@ class TangoBot:
         msb = (target >> 7) &0x7F
         cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(port) + chr(lsb) + chr(msb)
         print(cmd)
-        #self.execute(cmd)
+        self.execute(cmd)
 
     def execute(self, cmd):
         print('Writing')
-        usb.write(usb.encode('utf-8'))
+        self.usb.write(cmd.encode('utf-8'))
         print('Reading')
-        
+
 
 #implements keyboard input
 class KeyController:
@@ -76,7 +76,7 @@ class KeyController:
     def __init__(self, robo):
 
         self.robot = robo
-        
+
         win = tk.Tk()
 
         win.bind('<Up>', self.arrows)
@@ -93,32 +93,33 @@ class KeyController:
         win.mainloop()
 
     def arrows(self, key):
-        if(key.keycode == 38):
+        if(key.keycode == 111):
             self.robot.moveForward(key)
-        elif(key.keycode == 40):
+        elif(key.keycode == 116):
             self.robot.moveReverse(key)
-        elif(key.keycode == 37):
+        elif(key.keycode == 113):
             self.robot.turnLeft(key)
-        elif(key.keycode == 39):
+        elif(key.keycode == 114):
             self.robot.turnRight(key)
-        elif(key.keycode == 32):
+        elif(key.keycode == 65):
             self.robot.stop(key)
 
     def waist(self, key):
-        if(key.keycode == 90):
+        print(key.keycode)
+        if(key.keycode == 52):
             self.robot.moveWaist(key)
-        elif(key.keycode == 67):
+        elif(key.keycode == 54):
             self.robot.moveWaist(key)
             
 
     def head(self, key):
-        if(key.keycode == 87):
+        if(key.keycode == 25):
             self.robot.moveHead(key)
-        elif(key.keycode == 65):
+        elif(key.keycode == 38):
             self.robot.moveHead(key)
-        elif(key.keycode == 83):
+        elif(key.keycode == 39):
             self.robot.moveHead(key)
-        elif(key.keycode == 68):
+        elif(key.keycode == 40):
             self.robot.moveHead(key)
     
 

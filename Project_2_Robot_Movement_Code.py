@@ -24,38 +24,35 @@ class TangoBot:
                 print("No servo serial ports found")
                 sys.exit(0)
 
-        self.makeCommand(self.headHorz, 0x03)
-        self.makeCommand(self.headVert, 0x04)
-        self.makeCommand(self.waist, 0x02)
-        self.makeCommand(self.motors, 0x01)
-
-        #movement
-        #target = 6000
-        #least significant bit
-        #lsb = target &0x7F
-        #most significant bit
-        #msb = (target >> 7) &0x7F
-
-        #cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x03) + chr(lsb) + chr(msb)
-        #print('reading')
-        #print(cmd.encode())
-        #self.usb.write(cmd.encode())
-        #print('writing')
-        #touch screen
-        #motors
-        #servos
+        self.reset()
 
         #Ports: 0-1 motor controls, 2 waist, 3-4 head, arms after that
 
+    def reset(self):
+        self.waist = 6000
+        self.headHorz  = 6000
+        self.headVert = 6000
+        self.motors = 6000
+        self.makeCommand(self.headHorz, 0x03)
+        self.makeCommand(self.headVert, 0x04)
+        self.makeCommand(self.waist, 0x02)
+        self.makeCommand(self.motors, 0x00)
+
     def moveForward(self, key):
-        print("moving forward")
-        self.motors += 200
-        self.makeCommand(self.motors, 0x01)
+        if(self.motors < 7500):
+            self.motors += 500
+            self.makeCommand(self.motors, 0x00)
+            print("moving forward")
+        else:
+            print("max speed")
 
     def moveReverse(self, key):
-        self.motors -= 200
-        print("moving reverse")
-        self.makeCommand(self.motors, 0x01)
+        if(self.motors > 4500):
+            self.motors -= 500
+            self.makeCommand(self.motors, 0x00)
+            print("moving reverse")
+        else:
+            print("max speed")
 
     def turnRight(self, key):
         print('turning right')
@@ -65,36 +62,62 @@ class TangoBot:
 
     def stop(self, key):
         print("stopping")
+        if(self.motors > 6000):
+            while(self.motors > 6000):
+                self.motors -= 250
+                self.makeCommand(self.motors, 0x00)
+        elif(self.motors < 6000):
+            while(self.motors < 6000):
+                self.motors += 250
+                self.makeCommand(self.motors, 0x00)
 
     def moveWaistLeft(self, key):
-        self.waist += 200
-        print("swiveling left")
-        self.makeCommand(self.waist, 0x02)
+        if(self.waist < 9000):
+            self.waist += 750
+            self.makeCommand(self.waist, 0x02)
+            print("swiveling left")
+        else:
+            print("max swivel")
 
     def moveWaistRight(self, key):
-        self.waist -= 200
-        print("swiveling right")
-        self.makeCommand(self.waist, 0x02)
+        if(self.waist > 3000):
+            self.waist -= 500
+            self.makeCommand(self.waist, 0x02)
+            print("swiveling right")
+        else:
+            print("max swivel")
 
     def moveHeadRight(self, key):
-        print("move head right")
-        self.headHorz -= 200
-        self.makeCommand(self.headHorz, 0x03)
+        if(self.headHorz > 5000):
+            print("move head right")
+            self.headHorz -= 500
+            self.makeCommand(self.headHorz, 0x03)
+        else:
+            print("head too far right")
 
     def moveHeadLeft(self, key):
-        print("move head left")
-        self.headHorz += 200
-        self.makeCommand(self.headHorz, 0x03)
+        if(self.headHorz < 7000):
+            print("move head left")
+            self.headHorz += 500
+            self.makeCommand(self.headHorz, 0x03)
+        else:
+            print("head too far left")
 
     def moveHeadUp(self, key):
-        print("move head up")
-        self.headVert += 200
-        self.makeCommand(self.headVert, 0x04)
+        if(self.headVert < 7000):
+            print("move head up")
+            self.headVert += 200
+            self.makeCommand(self.headVert, 0x04)
+        else:
+            print("head too high")
 
     def moveHeadDown(self, key):
-        print("move head down")
-        self.headVert -= 200
-        self.makeCommand(self.headVert, 0x04)
+        if(self.headVert > 5000):
+            print("move head down")
+            self.headVert -= 200
+            self.makeCommand(self.headVert, 0x04)
+        else:
+            print("head too low")
 
     def makeCommand(self, target, port):
         lsb = target &0x7F
@@ -159,7 +182,7 @@ class KeyController:
             self.robot.moveHeadDown(key)
         elif(key.keycode == 40):
             self.robot.moveHeadRight(key)
-    
+
 
 def main():
     robot = TangoBot()

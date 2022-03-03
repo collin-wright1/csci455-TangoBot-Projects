@@ -10,6 +10,7 @@ class TangoBot:
         self.headHorz  = 6000
         self.headVert = 6000
         self.motors = 6000
+        self.turn = 6000
 
         try:
             self.usb = serial.Serial('/dev/ttyACM0')
@@ -33,32 +34,51 @@ class TangoBot:
         self.headHorz  = 6000
         self.headVert = 6000
         self.motors = 6000
+        self.turn = 6000
         self.makeCommand(self.headHorz, 0x03)
         self.makeCommand(self.headVert, 0x04)
         self.makeCommand(self.waist, 0x02)
         self.makeCommand(self.motors, 0x00)
-
-    def moveForward(self, key):
-        if(self.motors < 7500):
-            self.motors += 500
-            self.makeCommand(self.motors, 0x00)
-            print("moving forward")
-        else:
-            print("max speed")
+        self.makeCommand(self.turn, 0x01)
 
     def moveReverse(self, key):
-        if(self.motors > 4500):
-            self.motors -= 500
+        if(self.motors < 7500):
+            self.motors += 500
             self.makeCommand(self.motors, 0x00)
             print("moving reverse")
         else:
             print("max speed")
 
-    def turnRight(self, key):
-        print('turning right')
+    def moveForward(self, key):
+        if(self.motors > 4500):
+            self.motors -= 500
+            self.makeCommand(self.motors, 0x00)
+            print("moving forward")
+        else:
+            print("max speed")
 
     def turnLeft(self, key):
         print('turning left')
+#        self.motors = 6000
+#        self.makeCommand(self.motors, 0x00)
+        self.turn += 1000
+        self.makeCommand(self.turn, 0x01)
+#        time.sleep(1)
+#        for i in range(3):
+#            self.moveReverse(key)
+#        for i in range(3):
+#            self.moveForward(key)
+
+    def turnRight(self, key):
+        print('turning right')
+#        self.motors = 6000
+#        self.makeCommand(self.motors, 0x00)
+        self.turn -= 1000
+        self.makeCommand(self.turn, 0x01)
+#        for i in range(3):
+#            self.moveReverse(key)
+#        for i in range(3):
+#            self.moveForward(key)
 
     def stop(self, key):
         print("stopping")
@@ -72,16 +92,16 @@ class TangoBot:
                 self.makeCommand(self.motors, 0x00)
 
     def moveWaistLeft(self, key):
-        if(self.waist < 9000):
-            self.waist += 750
+        if(self.waist < 7000):
+            self.waist += 1000
             self.makeCommand(self.waist, 0x02)
             print("swiveling left")
         else:
             print("max swivel")
 
     def moveWaistRight(self, key):
-        if(self.waist > 3000):
-            self.waist -= 500
+        if(self.waist > 5000):
+            self.waist -= 1000
             self.makeCommand(self.waist, 0x02)
             print("swiveling right")
         else:
@@ -106,7 +126,7 @@ class TangoBot:
     def moveHeadUp(self, key):
         if(self.headVert < 7000):
             print("move head up")
-            self.headVert += 200
+            self.headVert += 500
             self.makeCommand(self.headVert, 0x04)
         else:
             print("head too high")
@@ -114,7 +134,7 @@ class TangoBot:
     def moveHeadDown(self, key):
         if(self.headVert > 5000):
             print("move head down")
-            self.headVert -= 200
+            self.headVert -= 500
             self.makeCommand(self.headVert, 0x04)
         else:
             print("head too low")

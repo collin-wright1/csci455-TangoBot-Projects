@@ -5,6 +5,12 @@ class TangoBot:
 
     #initializes robot
     def __init__(self):
+
+        self.waist = 6000
+        self.headHorz  = 6000
+        self.headVert = 6000
+        self.motors = 6000
+
         try:
             self.usb = serial.Serial('/dev/ttyACM0')
             print(self.usb.name)
@@ -18,17 +24,23 @@ class TangoBot:
                 print("No servo serial ports found")
                 sys.exit(0)
 
-        #movement
-        target = 4500
-        #least significant bit
-        lsb = target &0x7F
-        #most significant bit
-        msb = (target >> 7) &0x7F
+        self.makeCommand(self.headHorz, 0x03)
+        self.makeCommand(self.headVert, 0x04)
+        self.makeCommand(self.waist, 0x02)
+        self.makeCommand(self.motors, 0x01)
 
-        cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x02) + chr(lsb) + chr(msb)
-        print('reading')
-        self.usb.write(cmd.encode())
-        print('writing')
+        #movement
+        #target = 6000
+        #least significant bit
+        #lsb = target &0x7F
+        #most significant bit
+        #msb = (target >> 7) &0x7F
+
+        #cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(0x03) + chr(lsb) + chr(msb)
+        #print('reading')
+        #print(cmd.encode())
+        #self.usb.write(cmd.encode())
+        #print('writing')
         #touch screen
         #motors
         #servos
@@ -37,10 +49,13 @@ class TangoBot:
 
     def moveForward(self, key):
         print("moving forward")
-        self.makeCommand(4200, 0x01)
+        self.motors += 200
+        self.makeCommand(self.motors, 0x01)
 
     def moveReverse(self, key):
+        self.motors -= 200
         print("moving reverse")
+        self.makeCommand(self.motors, 0x01)
 
     def turnRight(self, key):
         print('turning right')
@@ -51,22 +66,46 @@ class TangoBot:
     def stop(self, key):
         print("stopping")
 
-    def moveWaist(self, key):
-        print("swiveling")
+    def moveWaistLeft(self, key):
+        self.waist += 200
+        print("swiveling left")
+        self.makeCommand(self.waist, 0x02)
 
-    def moveHead(self, key):
-        print("move head")
+    def moveWaistRight(self, key):
+        self.waist -= 200
+        print("swiveling right")
+        self.makeCommand(self.waist, 0x02)
+
+    def moveHeadRight(self, key):
+        print("move head right")
+        self.headHorz -= 200
+        self.makeCommand(self.headHorz, 0x03)
+
+    def moveHeadLeft(self, key):
+        print("move head left")
+        self.headHorz += 200
+        self.makeCommand(self.headHorz, 0x03)
+
+    def moveHeadUp(self, key):
+        print("move head up")
+        self.headVert += 200
+        self.makeCommand(self.headVert, 0x04)
+
+    def moveHeadDown(self, key):
+        print("move head down")
+        self.headVert -= 200
+        self.makeCommand(self.headVert, 0x04)
 
     def makeCommand(self, target, port):
         lsb = target &0x7F
         msb = (target >> 7) &0x7F
         cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(port) + chr(lsb) + chr(msb)
-        print(cmd)
+        print("Commanding", cmd)
         self.execute(cmd)
 
     def execute(self, cmd):
         print('Writing')
-        self.usb.write(cmd.encode('utf-8'))
+        self.usb.write(cmd.encode())
         print('Reading')
 
 
@@ -107,20 +146,19 @@ class KeyController:
     def waist(self, key):
         print(key.keycode)
         if(key.keycode == 52):
-            self.robot.moveWaist(key)
+            self.robot.moveWaistLeft(key)
         elif(key.keycode == 54):
-            self.robot.moveWaist(key)
-            
+            self.robot.moveWaistRight(key)
 
     def head(self, key):
         if(key.keycode == 25):
-            self.robot.moveHead(key)
+            self.robot.moveHeadUp(key)
         elif(key.keycode == 38):
-            self.robot.moveHead(key)
+            self.robot.moveHeadLeft(key)
         elif(key.keycode == 39):
-            self.robot.moveHead(key)
+            self.robot.moveHeadDown(key)
         elif(key.keycode == 40):
-            self.robot.moveHead(key)
+            self.robot.moveHeadRight(key)
     
 
 def main():

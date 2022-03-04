@@ -61,8 +61,9 @@ class TangoBot:
         print('turning left')
 #        self.motors = 6000
 #        self.makeCommand(self.motors, 0x00)
-        self.turn += 1000
+        self.turn += 1500
         self.makeCommand(self.turn, 0x01)
+        self.turn = 6000
 #        time.sleep(1)
 #        for i in range(3):
 #            self.moveReverse(key)
@@ -73,8 +74,9 @@ class TangoBot:
         print('turning right')
 #        self.motors = 6000
 #        self.makeCommand(self.motors, 0x00)
-        self.turn -= 1000
+        self.turn -= 1500
         self.makeCommand(self.turn, 0x01)
+        self.turn = 6000
 #        for i in range(3):
 #            self.moveReverse(key)
 #        for i in range(3):
@@ -143,7 +145,6 @@ class TangoBot:
         lsb = target &0x7F
         msb = (target >> 7) &0x7F
         cmd = chr(0xaa) + chr(0xC) + chr(0x04) + chr(port) + chr(lsb) + chr(msb)
-        print("Commanding", cmd)
         self.execute(cmd)
 
     def execute(self, cmd):

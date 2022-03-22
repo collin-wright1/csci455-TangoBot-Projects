@@ -1,3 +1,5 @@
+from email import message
+from typing import ParamSpecArgs
 import serial, time, sys
 import tkinter as tk
 
@@ -151,6 +153,29 @@ class TangoBot:
         print('Writing')
         self.usb.write(cmd.encode())
         print('Reading')
+    
+    def voiceController(self):
+        while "exit" not in self.message:
+            if "stop" in self.message:
+                self.stop()
+            elif "forward" in self.message:
+                self.moveForward()
+            elif "turn left" in self.message:
+                self.turnLeft()
+            elif "turn right" in self.message:
+                self.turnRight()
+            elif "look up" in self.message:
+                self.moveHeadUp()
+            elif "look down" in self.message:
+                self.moveHeadDown()
+            elif "look left" in self.message:
+                self.moveHeadLeft()
+            elif "look right" in self.message:
+                self.moveHeadRight()
+            elif "rotate left" in self.message:
+                self.moveWaistLeft()
+            elif "rotate right" in self.message:
+                self.moveWaistRight()
 
 
 #implements keyboard input

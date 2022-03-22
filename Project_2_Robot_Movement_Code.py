@@ -2,6 +2,8 @@ from email import message
 from typing import ParamSpecArgs
 import serial, time, sys
 import tkinter as tk
+import time
+import _thread, threading
 
 class TangoBot:
 
@@ -13,6 +15,8 @@ class TangoBot:
         self.headVert = 6000
         self.motors = 6000
         self.turn = 6000
+
+        self.message = "-1"
 
         try:
             self.usb = serial.Serial('/dev/ttyACM0')
@@ -63,7 +67,7 @@ class TangoBot:
         print('turning left')
 #        self.motors = 6000
 #        self.makeCommand(self.motors, 0x00)
-        self.turn += 1500
+        self.turn += 1300
         self.makeCommand(self.turn, 0x01)
         self.turn = 6000
 #        time.sleep(1)
@@ -76,7 +80,7 @@ class TangoBot:
         print('turning right')
 #        self.motors = 6000
 #        self.makeCommand(self.motors, 0x00)
-        self.turn -= 1500
+        self.turn -= 1300
         self.makeCommand(self.turn, 0x01)
         self.turn = 6000
 #        for i in range(3):
@@ -96,16 +100,16 @@ class TangoBot:
                 self.makeCommand(self.motors, 0x00)
 
     def moveWaistLeft(self, key):
-        if(self.waist < 7000):
-            self.waist += 1000
+        if(self.waist < 9000):
+            self.waist += 500
             self.makeCommand(self.waist, 0x02)
             print("swiveling left")
         else:
             print("max swivel")
 
     def moveWaistRight(self, key):
-        if(self.waist > 5000):
-            self.waist -= 1000
+        if(self.waist > 3000):
+            self.waist -= 500
             self.makeCommand(self.waist, 0x02)
             print("swiveling right")
         else:
@@ -177,6 +181,14 @@ class TangoBot:
             elif "rotate right" in self.message:
                 self.moveWaistRight()
 
+    def voiceInput(self):
+        print("Collecting Input")
+        for i in range(100):
+            print(str(i)
+
+    def mainThread(self):
+        for i in range(1000):
+            print(str(i))
 
 #implements keyboard input
 class KeyController:
@@ -201,6 +213,7 @@ class KeyController:
         win.mainloop()
 
     def arrows(self, key):
+        print(key.keycode)
         if(key.keycode == 111):
             self.robot.moveForward(key)
         elif(key.keycode == 116):
@@ -220,6 +233,7 @@ class KeyController:
             self.robot.moveWaistRight(key)
 
     def head(self, key):
+        print(key.keycode)
         if(key.keycode == 25):
             self.robot.moveHeadUp(key)
         elif(key.keycode == 38):
@@ -232,7 +246,13 @@ class KeyController:
 
 def main():
     robot = TangoBot()
-    kc = KeyController(robot)
+    try:
+        print("Starting Thread")
+        _thread.start_new_thread(robot.voiceInput,())
+    except:
+        print("Error: unable to start thread")
+    robot.voiceInput()
+    #kc = KeyController(robot)
 
 main()
 

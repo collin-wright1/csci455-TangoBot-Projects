@@ -184,7 +184,7 @@ class TangoBot:
     def voiceInput(self):
         print("Collecting Input")
         for i in range(100):
-            print(str(i)
+            print(str(i))
 
     def mainThread(self):
         for i in range(1000):

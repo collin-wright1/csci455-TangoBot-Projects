@@ -32,7 +32,7 @@ class Rule:
         #rids of open paren on lhs
         self.input = strList[0].strip("(")
         #isolates the output (rhs) and removes excess spaces
-        out = strList[1].strip(" ")
+        out = strList[1].strip(": ")
         #handles if output is a list of random choices
         if(out[0] == "["): #puts choice list into proper format
             out = out.strip("[")
@@ -140,9 +140,10 @@ def readDialogueFile(filename):
     counter = 0
     uN = "u" + str(counter)
     for line in file:
-        #Gets rid of tabbed white space and new lines
+        #Gets rid of white space and new lines
         line = line.replace("\t", "")
         line = line.replace("\n", "")
+        line = line.strip(" ")
         #stores topic variable lists in global variable store
         if(line[0] == "~"):
             topic = line.split(':')
@@ -154,8 +155,8 @@ def readDialogueFile(filename):
         #ignores comments
         elif(line[0] != '#'):
             #catches errors in file formatting
-            if(':' in line and '(' in line and ')' in line):
-                line = line.split(":")
+            if(line.count(":") == 2 and '(' in line and ')' in line):
+                line = line.split(":", 1)
                 #makes a tree of indefinite size
                 if(line[0] == "u"):
                     rul = Rule(line[1])
@@ -238,6 +239,8 @@ variableStore = VariableStore()
 def main():
     #read in dialogue file
     tree = readDialogueFile('D:\colli\Downloads\Dialogue.txt')
+    for i in tree:
+        print(i)
     #set variables as default
     inp = ""
     scope = []

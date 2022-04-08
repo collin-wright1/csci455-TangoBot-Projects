@@ -27,6 +27,7 @@ class Rule:
 
     #initializes rule by settting input/output values, takes a single line as input for parsing
     def __init__(self, inout):
+        inout = inout.strip(" ")
         #splits line by close paren
         strList = inout.split(")")
         #rids of open paren on lhs
@@ -159,7 +160,7 @@ def readDialogueFile(filename):
                 line = line.split(":", 1)
                 #makes a tree of indefinite size
                 if(line[0] == "u"):
-                    rul = Rule(line[1])
+                    rul = Rule(line[1].lower())
                     topNode = Node(rul)
                     tree.append(topNode)
                     nodeStack = []
@@ -169,7 +170,7 @@ def readDialogueFile(filename):
                 else:
                     while(uN != "u0"):
                         if(line[0] == uN):
-                            rul = Rule(line[1])
+                            rul = Rule(line[1].lower())
                             node = Node(rul)
                             nodeStack[-1].addChild(node)
                             nodeStack.append(node)
@@ -180,18 +181,6 @@ def readDialogueFile(filename):
                             nodeStack.pop(-1)
                             counter -= 1
                             uN = "u" + str(counter)
-                # if(line[0] == "u1"):
-                #     rul = Rule(line[1])
-                #     u1Node = Node(rul)
-                #     topNode.addChild(u1Node)
-                # if(line[0] == "u2"):
-                #     rul = Rule(line[1])
-                #     u2Node = Node(rul)
-                #     u1Node.addChild(u2Node)
-                # if(line[0] == "u3"):
-                #     rul = Rule(line[1])
-                #     u3Node = Node(rul)
-                #     u2Node.addChild(u3Node)
             else:
                 print("Error in Dialogue rules... Ignored")
     file.close()
@@ -220,6 +209,8 @@ def makeOptionList(line):
                 total = total.strip(" ")
                 rlist.append(total)
                 quote = []
+            else:
+                quote.append(word)
     return rlist
 
 #parses a given list from document
@@ -238,9 +229,7 @@ variableStore = VariableStore()
 #main function
 def main():
     #read in dialogue file
-    tree = readDialogueFile('D:\colli\Downloads\Dialogue.txt')
-    for i in tree:
-        print(i)
+    tree = readDialogueFile('/home/pi/csci455-TangoBot-Projects/demo.txt')
     #set variables as default
     inp = ""
     scope = []

@@ -100,7 +100,8 @@ def readDialogueFile(filename):
         if(line[0] == "~"):
             topic = line.split(':')
             topicList = parseList(topic[1])
-            variablestore.setVar(topic[0])   
+            variablestore.setVar(topic[0])
+            variablestore[topic[0]] = topicList   
         if(line[0] != '#'):
             line = line.split(":")
             if(line[0] == "u"):
@@ -122,9 +123,37 @@ def readDialogueFile(filename):
     file.close()
     return tree
 
-def parseList(line):
+def recombinePhrase(wordList):
+    phrases = []
+    for word in wordList:
+        # if quote at start
+        if word[0] == "\"":
+            for word2 in wordList: 
+                # if quote at end
+                if word2[-1] == "\"":
+                    # combine phrase
+                    phrases.add(word + " " + word2)
+    return phrases
+
     
-    pass
+
+def parseList(line):
+    rlist = []
+    # getting rid of opening and closing brace
+    line = line.strip("[")
+    line = line.strip("]")
+    line = line.split(" ")
+    # add the phrases
+    rlist.append(recombinePhrase(line))
+    for word in line:
+        if word[0] != "\"" and word[-1] != "\"": # preventing duplicate phrases
+            rlist.append(word)
+    return rlist
+
+    
+
+
+
 
 def main():
     tree = readDialogueFile('D:\colli\Downloads\Dialogue.txt')

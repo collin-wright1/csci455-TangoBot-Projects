@@ -1,0 +1,42 @@
+#:kivy 2.1.0
+RobotController:
+
+<ComponentButton@Button>:
+    on_press: self.createComponent()
+
+
+<RobotController>:
+    orientation: 'vertical'
+    StackLayout:
+        id: stack
+        Label:
+            text: "Middle Section"
+    BoxLayout:
+        orientation: 'horizontal'
+        ComponentButton:
+            text: 'Motor'
+        ComponentButton:
+            text: 'Head'
+        ComponentButton:
+            text: 'Waist'
+        ComponentButton:
+            text: 'Speech In'
+        ComponentButton:
+            text: 'Speech Out'
+    BoxLayout:
+        size: self.parent.size
+        pos: self.parent.pos
+        RunButton:
+            background_normal: ''
+            background_color: 0, .12, 0, .85
+            text: 'Play'
+            on_press: self.run()
+        Button:
+            background_normal: ''
+            background_color: 1, 1, .4, .85
+            text: 'Remove Prior'
+        ClearButton:
+            background_normal: ''
+            background_color: 1, .3, .4, .85
+            text: 'Remove All'
+            on_press: self.clear()

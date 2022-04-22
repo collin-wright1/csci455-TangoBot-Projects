@@ -229,7 +229,7 @@ class HeadComponent(Component):
         print(self.type)
         print(self.config)
         robot.moveHeadLeft()
-        robot.reset()
+        robot.stop()
 
 class WaistComponent(Component):
 

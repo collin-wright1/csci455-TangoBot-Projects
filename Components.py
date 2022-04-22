@@ -3,10 +3,10 @@ Class for storing movements and options on the timeline.
 Type dictates which group of functionality is targeted
 Config is a dictionary of variables or commands, dependent on the function.
 """
-# TODO: currently execute just prints what's in the component list. Need to hook up execute method to robot code.
 class Component:
     config = ""
     type = ""
+    index = None
 
     def create(text):
         if text == "Motor":
@@ -15,15 +15,23 @@ class Component:
             return HeadComponent("")
         elif text == "Waist":
             return WaistComponent("")
-        elif text == "Speech In":
+        elif text == "SpeechIn":
             return speechInput("")
-        elif text == "Speech Out":
+        elif text == "SpeechOut":
             return speechOutput("")
 
     def getConfig(self):
         return self.config
 
+    def getIndex(self):
+        return self.index
+    
+    def setIndex(self, index):
+        self.index = index
+
     def editConfig(self, newConfig):
+        #print("in Component")
+        #print(newConfig)
         self.config = newConfig
 
     def execute():
@@ -32,12 +40,15 @@ class Component:
 
 class MotorComponent(Component):
 
+    # need speed and time, direction stored in speed
+
     def __init__(self, config):
         self.type = "Motor"
         self.config = config
 
     def execute(self):
         print(self.type)
+        print(self.config)
 
 class HeadComponent(Component):
 
@@ -47,6 +58,7 @@ class HeadComponent(Component):
 
     def execute(self):
         print(self.type)
+        print(self.config)
 
 class WaistComponent(Component):
 
@@ -56,6 +68,7 @@ class WaistComponent(Component):
 
     def execute(self):
         print(self.type)
+        print(self.config)
 
 class speechInput(Component):
 
@@ -65,6 +78,7 @@ class speechInput(Component):
 
     def execute(self):
         print(self.type)
+        print(self.config)
 
 class speechOutput(Component):
 
@@ -74,3 +88,4 @@ class speechOutput(Component):
 
     def execute(self):
         print(self.type)
+        print(self.config)

@@ -1,42 +1,111 @@
 #:kivy 2.1.0
+#: import Factory kivy.factory.Factory
+
 RobotController:
-
-<ComponentButton@Button>:
-    on_press: self.createComponent()
-
-
-<RobotController>:
+    id:controller
     orientation: 'vertical'
-    StackLayout:
+    GridLayout:
+        cols: 8
+        rows: 1
         id: stack
-        Label:
-            text: "Middle Section"
     BoxLayout:
         orientation: 'horizontal'
-        ComponentButton:
+        Button:
             text: 'Motor'
-        ComponentButton:
+            on_press: controller.createMotorComponent()
+        Button:
             text: 'Head'
-        ComponentButton:
+            on_press: controller.createHeadComponent()
+        Button:
             text: 'Waist'
-        ComponentButton:
+            on_press: controller.createWaistComponent()
+        Button:
             text: 'Speech In'
-        ComponentButton:
+            on_press: controller.createSpeechInComponent()
+        Button:
             text: 'Speech Out'
+            on_press: controller.createSpeechOutComponent()
     BoxLayout:
         size: self.parent.size
         pos: self.parent.pos
-        RunButton:
+        Button:
             background_normal: ''
             background_color: 0, .12, 0, .85
             text: 'Play'
-            on_press: self.run()
+            on_press: controller.run()
         Button:
-            background_normal: ''
-            background_color: 1, 1, .4, .85
-            text: 'Remove Prior'
-        ClearButton:
             background_normal: ''
             background_color: 1, .3, .4, .85
             text: 'Remove All'
-            on_press: self.clear()
+            on_press: controller.clear()
+
+<MotorComponentInstance>:
+    id: self.getId()
+    orientation: 'vertical'
+    Label:
+        text: "Motor"
+    Button:
+        text: 'edit'
+        on_press: self.parent.createMotorPopup(self.parent.id)
+
+<HeadComponentInstance>:
+    id: self.getId()
+    orientation: 'vertical'
+    Label:
+        text: "Head"
+    Button:
+        text: 'edit'
+        on_press: self.parent.editConfig(self.parent.id, "headconfig")
+
+<WaistComponentInstance>:
+    id: self.getId()
+    orientation: 'vertical'
+    Label:
+        text: "Waist"
+    Button:
+        text: 'edit'
+        on_press: self.parent.edit(self.parent.id, "waistconfig")
+
+<SpeechInComponentInstance>:
+    id: self.getId()
+    orientation: 'vertical'
+    Label:
+        text: "Speech In"
+    Button:
+        text: 'edit'
+        on_press: self.parent.editConfig(self.parent.id, "speechinconfig")
+
+<SpeechOutComponentInstance>:
+    id: self.getId()
+    orientation: 'vertical'
+    Label:
+        text: "Speech Out"
+    Button:
+        text: 'edit'
+        on_press: self.parent.editConfig(self.parent.id, "speechoutconfig")
+
+<MotorPopup>:
+    title: 'Edit Motor'
+    id: motorPop
+    size_hint: (0.5, 0.5)
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            rows: 2
+            cols: 2
+            Button:
+                text: "Left"
+                on_press: motorPop.changeMotorConfigValue("updateleft")
+            Button:
+                text: "Right"
+                on_press: motorPop.changeMotorConfigValue("updateRight")
+            Button:
+                text: "Forward"
+                on_press: motorPop.changeMotorConfigValue("UpdateForward")
+            Button:
+                text: "Backward"
+                on_press: motorPop.changeMotorConfigValue("UpdateBackwards")
+        Button:
+            text: "submit"
+            on_press: motorPop.dismiss()
+    

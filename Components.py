@@ -228,7 +228,7 @@ class HeadComponent(Component):
         robot = TangoBot()
         print(self.type)
         print(self.config)
-        robot.moveHeadRight()
+        robot.moveHeadLeft()
 
 class WaistComponent(Component):
 

@@ -112,7 +112,6 @@ class MotorComponentInstance(BoxLayout):
     def createMotorPopup(self, id):
         pop = MotorPopup(id)
         pop.open()
-
     
     # keeps track of where in the component list the object is, so it can be edited later
     def setIndex(self, index):
@@ -123,6 +122,10 @@ class MotorComponentInstance(BoxLayout):
 
 # TODO: add create{}Popup method
 class HeadComponentInstance(BoxLayout):
+    
+    def createHeadPopup(self, id):
+        pop = HeadPopup(id)
+        pop.open()
 
     def setIndex(self, index):
         self.id = index
@@ -132,6 +135,10 @@ class HeadComponentInstance(BoxLayout):
 
 # TODO: add create{}Popup method
 class WaistComponentInstance(BoxLayout):
+    
+    def createWaistPopup(self, id):
+        pop = WaistPopup(id)
+        pop.open()
 
     def setIndex(self, index):
         self.id = index
@@ -143,6 +150,10 @@ class WaistComponentInstance(BoxLayout):
 # TODO: add create{}Popup method
 class SpeechInComponentInstance(BoxLayout):
 
+    def createSpeakInPopup(self, id):
+        pop = SpeakInPopup(id)
+        pop.open()
+    
     def setIndex(self, index):
         self.id = index
 
@@ -153,6 +164,10 @@ class SpeechInComponentInstance(BoxLayout):
 # TODO: add create{}Popup method
 class SpeechOutComponentInstance(BoxLayout):
 
+    def createSpeakOutPopup(self, id):
+        pop = SpeakOutPopup(id)
+        pop.open()
+    
     def setIndex(self, index):
         self.id = index
 

@@ -208,14 +208,8 @@ class MotorComponent(Component):
 
     # TODO: Implement motor execute
     def execute(self):
-        robot = TangoBot()
         print(self.type)
         print(self.config)
-        robot.moveForward()
-        time.sleep(1)
-        robot.moveForward()
-        time.sleep(1)
-        robot.moveForward()
 
 class HeadComponent(Component):
 
@@ -225,14 +219,8 @@ class HeadComponent(Component):
 
     # TODO: Implement Head Execute
     def execute(self):
-        robot = TangoBot()
         print(self.type)
         print(self.config)
-        robot.moveHeadLeft()
-        time.sleep(1)
-        robot.stop()
-        time.sleep(1)
-        robot.stop()
 
 class WaistComponent(Component):
 

@@ -211,6 +211,7 @@ class MotorComponent(Component):
         robot = TangoBot()
         print(self.type)
         print(self.config)
+        robot.moveForward()
 
 class HeadComponent(Component):
 

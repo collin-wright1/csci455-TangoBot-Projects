@@ -203,4 +203,4 @@ class ComponentManager:
         robot.stop()
         for component in self.timeline:
             component.execute()
-            robot.moveHeadLeft()
+            robot.moveHeadRight()

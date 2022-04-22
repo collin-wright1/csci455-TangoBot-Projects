@@ -164,6 +164,7 @@ class ComponentManager:
     totalComponents = 0
 
     def __init__(self):
+        self.robot = TangoBot()
         self.timeline = []
 
     def createComponent(self, text):
@@ -199,32 +200,31 @@ class ComponentManager:
         return self.timeline
 
     def runTimeline(self):
-        robot = TangoBot()
-        robot.stop()
+        self.robot.stop()
         for component in self.timeline:
             component.execute()
-            robot.moveHeadRight()
+            self.robot.moveHeadRight()
             if(component.type == "Head"):
                 if(component.config == "updateleft"):
-                    robot.moveHeadLeft()
+                    self.robot.moveHeadLeft()
                 if(component.config == "updateRight"):
-                    robot.moveHeadRight()
+                    self.robot.moveHeadRight()
                 if(component.config == "updateUp"):
-                    robot.moveHeadUp()
+                    self.robot.moveHeadUp()
                 if(component.config == "updateDown"):
-                    robot.moveHeadDown()
+                    self.robot.moveHeadDown()
             if(component.type == "Waist"):
                 if(component.config == "updateleft"):
-                    robot.moveWaistRight()
+                    self.robot.moveWaistRight()
                 if(component.config == "updateRight"):
-                    robot.moveWaistLeft()
+                    self.robot.moveWaistLeft()
             if(component.type == "Motor"):
                 if(component.config == "updateleft"):
-                    robot.turnLeft()
+                    self.robot.turnLeft()
                 if(component.config == "updateRight"):
-                    robot.turnRight()
+                    self.robot.turnRight()
                 if(component.config == "updateForward"):
-                    robot.moveForward()
+                    self.robot.moveForward()
                 if(component.config == "updateBackwards"):
-                    robot.moveReverse()
+                    self.robot.moveReverse()
             time.sleep(1)

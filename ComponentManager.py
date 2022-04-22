@@ -207,9 +207,9 @@ class ComponentManager:
             if(component.type == "Head"):
                 if(component.config == "updateleft"):
                     robot.moveHeadLeft()
-                if(componend.config == "updateRight"):
+                if(component.config == "updateRight"):
                     robot.moveHeadRight()
-                if(componend.config == "updateUp"):
+                if(component.config == "updateUp"):
                     robot.moveHeadUp()
-                if(componend.config == "updateDown"):
+                if(component.config == "updateDown"):
                     robot.moveHeadDown()

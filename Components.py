@@ -1,3 +1,6 @@
+from Project_2_Robot_Movement_Code import TangoBot
+
+
 """
 Class for storing movements and options on the timeline.
 Type dictates which group of functionality is targeted
@@ -51,6 +54,7 @@ class MotorComponent(Component):
 
     # TODO: Implement motor execute
     def execute(self):
+        robot = TangoBot()
         print(self.type)
         print(self.config)
 

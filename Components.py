@@ -229,6 +229,9 @@ class HeadComponent(Component):
         print(self.type)
         print(self.config)
         robot.moveHeadLeft()
+        time.sleep(1)
+        robot.stop()
+        time.sleep(1)
         robot.stop()
 
 class WaistComponent(Component):

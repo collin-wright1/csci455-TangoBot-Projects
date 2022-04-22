@@ -213,3 +213,8 @@ class ComponentManager:
                     robot.moveHeadUp()
                 if(component.config == "updateDown"):
                     robot.moveHeadDown()
+            if(component.type == "Waist"):
+                if(component.config == "updateleft"):
+                    robot.moveWaistRight()
+                if(component.config == "updateRight"):
+                    robot.moveWaistLeft()

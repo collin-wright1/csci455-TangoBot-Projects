@@ -55,7 +55,7 @@ RobotController:
         text: "Head"
     Button:
         text: 'edit'
-        on_press: self.parent.createHeadPopup(self.parent.id, "headconfig")
+        on_press: self.parent.createHeadPopup(self.parent.id)
 
 <WaistComponentInstance>:
     id: self.getId()
@@ -64,7 +64,7 @@ RobotController:
         text: "Waist"
     Button:
         text: 'edit'
-        on_press: self.parent.createWaistPopup(self.parent.id, "waistconfig")
+        on_press: self.parent.createWaistPopup(self.parent.id)
 
 <SpeechInComponentInstance>:
     id: self.getId()
@@ -73,7 +73,7 @@ RobotController:
         text: "Speech In"
     Button:
         text: 'edit'
-        on_press: self.parent.createSpeechInPopup(self.parent.id, "speechinconfig")
+        on_press: self.parent.createSpeechInPopup(self.parent.id)
 
 <SpeechOutComponentInstance>:
     id: self.getId()
@@ -82,7 +82,7 @@ RobotController:
         text: "Speech Out"
     Button:
         text: 'edit'
-        on_press: self.parent.createSpeechOutPopup(self.parent.id, "speechoutconfig")
+        on_press: self.parent.createSpeechOutPopup(self.parent.id)
 
 <MotorPopup>:
     title: 'Edit Motor'

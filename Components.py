@@ -212,7 +212,9 @@ class MotorComponent(Component):
         print(self.type)
         print(self.config)
         robot.moveForward()
+        time.sleep(1)
         robot.moveForward()
+        time.sleep(1)
         robot.moveForward()
 
 class HeadComponent(Component):

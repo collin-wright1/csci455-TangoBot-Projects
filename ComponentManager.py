@@ -200,6 +200,7 @@ class ComponentManager:
 
     def runTimeline(self):
         robot = TangoBot()
+        robot.stop()
         for component in self.timeline:
             component.execute()
-            robot.moveForward()
+            robot.moveHeadRight()

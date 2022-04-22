@@ -218,3 +218,4 @@ class ComponentManager:
                     robot.moveWaistRight()
                 if(component.config == "updateRight"):
                     robot.moveWaistLeft()
+            time.sleep(2)

@@ -108,4 +108,47 @@ RobotController:
         Button:
             text: "submit"
             on_press: motorPop.dismiss()
+            
+    <WaistPopup>:
+    title: 'Edit Waist'
+    id: waistPop
+    size_hint: (0.5, 0.5)
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            rows: 1
+            cols: 2
+            Button:
+                text: "Left"
+                on_press: waistPop.changeWaistConfigValue("updateleft")
+            Button:
+                text: "Right"
+                on_press: waistPop.changeWaistConfigValue("updateRight")
+        Button:
+            text: "submit"
+            on_press: waistPop.dismiss()
     
+    <HeadPopup>:
+    title: 'Edit Head'
+    id: headPop
+    size_hint: (0.5, 0.5)
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            rows: 2
+            cols: 2
+            Button:
+                text: "Left"
+                on_press: headPop.changeHeadConfigValue("updateleft")
+            Button:
+                text: "Right"
+                on_press: headPop.changeHeadConfigValue("updateRight")
+            Button:
+                text: "Up"
+                on_press: headPop.changeHeadConfigValue("UpdateUp")
+            Button:
+                text: "Down"
+                on_press: headPop.changeHeadConfigValue("UpdateDown")
+        Button:
+            text: "submit"
+            on_press: headPop.dismiss()

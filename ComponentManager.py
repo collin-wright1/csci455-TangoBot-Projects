@@ -204,6 +204,8 @@ class ComponentManager:
         for component in self.timeline:
             component.execute()
             self.robot.moveHeadRight()
+            print(component.type)
+            print(component.config)
             if(component.type == "Head"):
                 if(component.config == "updateleft"):
                     self.robot.moveHeadLeft()

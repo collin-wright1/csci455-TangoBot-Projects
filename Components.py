@@ -1,5 +1,5 @@
 #from Project_2_Robot_Movement_Code import TangoBot
-import sys
+import sys, serial, time
 
 #TangoBot Class from other projects
 class TangoBot:

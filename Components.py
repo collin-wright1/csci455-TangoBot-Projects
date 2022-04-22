@@ -227,6 +227,7 @@ class HeadComponent(Component):
     def execute(self):
         print(self.type)
         print(self.config)
+        robot.moveHeadRight()
 
 class WaistComponent(Component):
 

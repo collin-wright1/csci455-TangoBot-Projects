@@ -204,3 +204,12 @@ class ComponentManager:
         for component in self.timeline:
             component.execute()
             robot.moveHeadRight()
+            if(component.type == "Head"):
+                if(component.config == "updateleft"):
+                    robot.moveHeadLeft()
+                if(componend.config == "updateRight"):
+                    robot.moveHeadRight()
+                if(componend.config == "updateUp"):
+                    robot.moveHeadUp()
+                if(componend.config == "updateDown"):
+                    robot.moveHeadDown()

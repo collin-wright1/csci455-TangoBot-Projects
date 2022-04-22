@@ -225,6 +225,7 @@ class HeadComponent(Component):
 
     # TODO: Implement Head Execute
     def execute(self):
+        robot = TangoBot()
         print(self.type)
         print(self.config)
         robot.moveHeadRight()

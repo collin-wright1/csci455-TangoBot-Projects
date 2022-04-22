@@ -9,14 +9,19 @@ from kivy.uix.popup import Popup
 
 """
 This file implements the gui for working with the robot code.
-The robot app is the root widget, and it creates 3 other widgets:
-    At the top, 5 buttons for creating components in a box layout
-    In the middle, a stack layout where the components are added
+The robot controller is the root widget, and it creates 3 other widgets:
+    At the top, a grid layout of at max 8 components where component instances are added
+    In the middle, 5 buttons for creating components in a box layout
     At the bottom, an anchor layout with a remove and play button
-Component preferences can be accessed by double tapping on a component.
+Component preferences can be accessed by taping edit on a component instance.
+
+The layout and connection to functions is done in the robot.kv file, the logic is implemented in RobotApp,
+Components, and ComponentManager .py files.
 """
 kivy.require('2.1.0')
 
+# TODO: Create Waist, Head, SpeakIn, SpeakOut popup instance classes
+# TODO: Create waist, head, speakin, speakout popout layouts in .kv file (use motor as reference)
 class MotorPopup(Popup):
 
     # inherits id from parent (the instance that spawned it)
@@ -27,26 +32,29 @@ class MotorPopup(Popup):
     def getParentId(self):
         return self.parentId
     
+    # TODO: Add actual value being returned by buttons in the kv file
     def changeMotorConfigValue(self, config):
         #print("In Robot App")
         #print(config)
         manager.editConfig(self.parentId, config)
 
 
-# TODO: add popup to change config to each class
+# TODO: add create{}Popup method
 class MotorComponentInstance(BoxLayout):
 
     def createMotorPopup(self, id):
         pop = MotorPopup(id)
         pop.open()
 
+    
+    # keeps track of where in the component list the object is, so it can be edited later
     def setIndex(self, index):
         self.id = index
 
     def getId(self):
         return self.id
 
-
+# TODO: add create{}Popup method
 class HeadComponentInstance(BoxLayout):
 
     def setIndex(self, index):
@@ -55,9 +63,7 @@ class HeadComponentInstance(BoxLayout):
     def getId(self):
         return self.id
 
-    def editConfig(self, id, newConfig):
-        manager.getTimeline()[id].editConfig(newConfig)
-
+# TODO: add create{}Popup method
 class WaistComponentInstance(BoxLayout):
 
     def setIndex(self, index):
@@ -66,9 +72,8 @@ class WaistComponentInstance(BoxLayout):
     def getId(self):
         return self.id
 
-    def editConfig(self, id, newConfig):
-        manager.getTimeline()[id].editConfig(newConfig)
 
+# TODO: add create{}Popup method
 class SpeechInComponentInstance(BoxLayout):
 
     def setIndex(self, index):
@@ -77,9 +82,8 @@ class SpeechInComponentInstance(BoxLayout):
     def getId(self):
         return self.id
 
-    def editConfig(self, id, newConfig):
-        manager.getTimeline()[id].editConfig(newConfig)
 
+# TODO: add create{}Popup method
 class SpeechOutComponentInstance(BoxLayout):
 
     def setIndex(self, index):
@@ -88,19 +92,16 @@ class SpeechOutComponentInstance(BoxLayout):
     def getId(self):
         return self.id
 
-    def editConfig(self, id, newConfig):
-        manager.getTimeline()[id].editConfig(newConfig)
-
 class RobotController(BoxLayout):
 
     def createMotorComponent(self):
-        if manager.getTotalComponents() == 8:
+        if manager.getTotalComponents() == 8: # don't make any more than 8 components (or the layout breaks lol)
             pass
         else:
-            manager.createComponent("Motor")
+            manager.createComponent("Motor") # The text gets passed to the component constructor which dictates the type of component
             mc = MotorComponentInstance()
-            mc.setIndex(manager.getTotalComponents()-1)
-            self.ids.stack.add_widget(mc)
+            mc.setIndex(manager.getTotalComponents()-1) # super janky way of assigning ids based on how many are in the stack but it works
+            self.ids.stack.add_widget(mc) # dynamically putting the instance onto the top grid
 
     def createHeadComponent(self):
         if manager.getTotalComponents() == 8:
@@ -139,18 +140,19 @@ class RobotController(BoxLayout):
             self.ids.stack.add_widget(outspeech)
 
     def run(self):
-        manager.runTimeline()
+        manager.runTimeline() # loops through the components and runs their .execute() methods
     
+    # removes all widgets from the stack. Easier than removing them one by one
     def clear(self):
         manager.clearTimeline()
         self.ids.stack.clear_widgets() 
 
-
+# Don't touch, this has to be here
 class RobotApp(App):
     pass
         
 
 
 if __name__ == '__main__':
-    manager = ComponentManager()
+    manager = ComponentManager() # functions as the back end, managing the components and applying edits to their configs
     RobotApp().run()

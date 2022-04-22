@@ -1,7 +1,7 @@
 """
-Used for rendering the GUI and taking user input 
+Used for managing and updating the components on the timeline 
 """
-from Components import Component, MotorComponent, HeadComponent, WaistComponent, speechInput, speechOutput
+from Components import Component
 
 class ComponentManager:
 

@@ -8,6 +8,9 @@ class Component:
     type = ""
     index = None
 
+    # don't know if index or type is really necessary here but I'm scared to touch them
+
+    # decides which component to create
     def create(text):
         if text == "Motor":
             return MotorComponent("")
@@ -46,6 +49,7 @@ class MotorComponent(Component):
         self.type = "Motor"
         self.config = config
 
+    # TODO: Implement motor execute
     def execute(self):
         print(self.type)
         print(self.config)
@@ -56,6 +60,7 @@ class HeadComponent(Component):
         self.type = "Head"
         self.config = config
 
+    # TODO: Implement Head Execute
     def execute(self):
         print(self.type)
         print(self.config)
@@ -66,6 +71,7 @@ class WaistComponent(Component):
         self.type = "Waist"
         self.config = config
 
+    # TODO: Implement waist execute
     def execute(self):
         print(self.type)
         print(self.config)
@@ -76,6 +82,7 @@ class speechInput(Component):
         self.type = "speechInput"
         self.config = config
 
+    # TODO: Implement speech in execute
     def execute(self):
         print(self.type)
         print(self.config)
@@ -86,6 +93,7 @@ class speechOutput(Component):
         self.type = "speechOutput"
         self.config = config
 
+    # TODO: Implement speech out execute
     def execute(self):
         print(self.type)
         print(self.config)

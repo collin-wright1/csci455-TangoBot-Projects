@@ -38,7 +38,74 @@ class MotorPopup(Popup):
         #print(config)
         manager.editConfig(self.parentId, config)
 
+#Waist PopUp Class
+class WaistPopup(Popup):
 
+    # inherits id from parent (the instance that spawned it)
+    def __init__(self, parent, **kwargs):
+        super(Popup, self).__init__(**kwargs)
+        self.parentId = parent
+
+    def getParentId(self):
+        return self.parentId
+    
+    # TODO: Add actual value being returned by buttons in the kv file
+    def changeWaistConfigValue(self, config):
+        #print("In Robot App")
+        #print(config)
+        manager.editConfig(self.parentId, config)
+        
+#Head PopUp Class
+class HeadPopup(Popup):
+
+    # inherits id from parent (the instance that spawned it)
+    def __init__(self, parent, **kwargs):
+        super(Popup, self).__init__(**kwargs)
+        self.parentId = parent
+
+    def getParentId(self):
+        return self.parentId
+    
+    # TODO: Add actual value being returned by buttons in the kv file
+    def changeHeadConfigValue(self, config):
+        #print("In Robot App")
+        #print(config)
+        manager.editConfig(self.parentId, config)
+
+#Speak In PopUp Class
+class SpeakInPopup(Popup):
+
+    # inherits id from parent (the instance that spawned it)
+    def __init__(self, parent, **kwargs):
+        super(Popup, self).__init__(**kwargs)
+        self.parentId = parent
+
+    def getParentId(self):
+        return self.parentId
+    
+    # TODO: Add actual value being returned by buttons in the kv file
+    def changeSpeakInConfigValue(self, config):
+        #print("In Robot App")
+        #print(config)
+        manager.editConfig(self.parentId, config)
+
+#Speak Out PopUp Class
+class SpeakOutPopup(Popup):
+
+    # inherits id from parent (the instance that spawned it)
+    def __init__(self, parent, **kwargs):
+        super(Popup, self).__init__(**kwargs)
+        self.parentId = parent
+
+    def getParentId(self):
+        return self.parentId
+    
+    # TODO: Add actual value being returned by buttons in the kv file
+    def changeSpeakOutConfigValue(self, config):
+        #print("In Robot App")
+        #print(config)
+        manager.editConfig(self.parentId, config)
+        
 # TODO: add create{}Popup method
 class MotorComponentInstance(BoxLayout):
 

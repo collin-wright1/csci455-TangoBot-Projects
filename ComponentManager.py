@@ -218,4 +218,13 @@ class ComponentManager:
                     robot.moveWaistRight()
                 if(component.config == "updateRight"):
                     robot.moveWaistLeft()
+            if(component.type == "Motor"):
+                if(component.config == "updateleft"):
+                    robot.turnLeft()
+                if(component.config == "updateRight"):
+                    robot.turnRight()
+                if(component.config == "updateForward"):
+                    robot.moveForward()
+                if(component.config == "updateBackwards"):
+                    robot.moveReverse()
             time.sleep(1)

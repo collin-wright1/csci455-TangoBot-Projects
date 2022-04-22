@@ -212,6 +212,8 @@ class MotorComponent(Component):
         print(self.type)
         print(self.config)
         robot.moveForward()
+        robot.moveForward()
+        robot.moveForward()
 
 class HeadComponent(Component):
 

@@ -55,7 +55,7 @@ RobotController:
         text: "Head"
     Button:
         text: 'edit'
-        on_press: self.parent.editConfig(self.parent.id, "headconfig")
+        on_press: self.parent.createHeadPopup(self.parent.id)
 
 <WaistComponentInstance>:
     id: self.getId()
@@ -64,7 +64,7 @@ RobotController:
         text: "Waist"
     Button:
         text: 'edit'
-        on_press: self.parent.edit(self.parent.id, "waistconfig")
+        on_press: self.parent.createWaistPopup(self.parent.id)
 
 <SpeechInComponentInstance>:
     id: self.getId()
@@ -73,7 +73,7 @@ RobotController:
         text: "Speech In"
     Button:
         text: 'edit'
-        on_press: self.parent.editConfig(self.parent.id, "speechinconfig")
+        on_press: self.parent.createSpeechInPopup(self.parent.id)
 
 <SpeechOutComponentInstance>:
     id: self.getId()
@@ -82,7 +82,7 @@ RobotController:
         text: "Speech Out"
     Button:
         text: 'edit'
-        on_press: self.parent.editConfig(self.parent.id, "speechoutconfig")
+        on_press: self.parent.createSpeechOutPopup(self.parent.id)
 
 <MotorPopup>:
     title: 'Edit Motor'
@@ -108,4 +108,47 @@ RobotController:
         Button:
             text: "submit"
             on_press: motorPop.dismiss()
+            
+<WaistPopup>:
+    title: 'Edit Waist'
+    id: waistPop
+    size_hint: (0.5, 0.5)
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            rows: 1
+            cols: 2
+            Button:
+                text: "Left"
+                on_press: waistPop.changeWaistConfigValue("updateleft")
+            Button:
+                text: "Right"
+                on_press: waistPop.changeWaistConfigValue("updateRight")
+        Button:
+            text: "submit"
+            on_press: waistPop.dismiss()
     
+<HeadPopup>:
+    title: 'Edit Head'
+    id: headPop
+    size_hint: (0.5, 0.5)
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            rows: 2
+            cols: 2
+            Button:
+                text: "Left"
+                on_press: headPop.changeHeadConfigValue("updateleft")
+            Button:
+                text: "Right"
+                on_press: headPop.changeHeadConfigValue("updateRight")
+            Button:
+                text: "Up"
+                on_press: headPop.changeHeadConfigValue("updateUp")
+            Button:
+                text: "Down"
+                on_press: headPop.changeHeadConfigValue("updateDown")
+        Button:
+            text: "submit"
+            on_press: headPop.dismiss()

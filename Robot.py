@@ -50,7 +50,7 @@ class Robot:
             print("I can move {}".format(i))
         choice = input("Where should I go?\n")
         if choice not in possMovesArray and not "exit":
-            choice = input("I can't do move there. Try a different movement.\n ")
+            choice = input("I can't do move there. Try a different movement.\n ") # TODO: might not be working correctly
         return choice
 
     def takeDamage(self, damage):

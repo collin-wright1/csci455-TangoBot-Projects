@@ -7,7 +7,7 @@ if __name__ == "__main__":
     choice = ""
     robot = Robot()
     while choice != "exit":
-        nmap.induceAction()
+        nmap.induceAction(robot)
         choice = robot.menu()
         if choice == "scout":
             move = robot.scout(nmap)

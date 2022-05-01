@@ -14,7 +14,7 @@ class Node:
 
     # TODO: Need to implement a general method to check if the node is the end and if the robot has the key. If so, the game is over.
 
-    def performAction(self):
+    def performAction(self, robot):
         pass
 
     def getType(self):
@@ -30,7 +30,7 @@ class EmptyNode(Node):
         self.encountered = False
         
 
-    def performAction(self):
+    def performAction(self, robot):
         if self.encountered == False:
             self.encountered = True
             print("There's nothing here")

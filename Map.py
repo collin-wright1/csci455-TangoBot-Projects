@@ -49,11 +49,11 @@ class Map:
         return self.robotX, self.robotY
 
     # calls the action of the current robot the robot is in.
-    def induceAction(self):
+    def induceAction(self, robot):
         x = self.robotX
         y = self.robotY
         # TODO: check the type of node and pass in the robot if necessary (when it's a heal, an item, or a fight).
-        self.navMap[x][y].performAction()
+        self.navMap[x][y].performAction(robot)
 
     # evaluates where the robot can move to.
     def getPossibleMoves(self):

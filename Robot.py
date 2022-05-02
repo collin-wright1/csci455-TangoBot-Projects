@@ -129,6 +129,8 @@ class Robot:
             self.bot.stop()
             time.sleep(1)
             self.bot.moveForward()
+            time.sleep(1)
+            self.bot.stop()
         elif choice == "down":
             robomap.moveDown()
             self.bot.stop()
@@ -136,6 +138,8 @@ class Robot:
             self.bot.stop()
             time.sleep(1)
             self.bot.moveReverse()
+            time.sleep(1)
+            self.bot.stop()
         self.turns += 1
         
 

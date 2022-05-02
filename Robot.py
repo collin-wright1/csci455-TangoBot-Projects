@@ -198,7 +198,7 @@ class TangoBot:
 
     def moveReverse(self):
         if(self.motors < 7500):
-            self.motors += 500
+            self.motors += 1000
             self.makeCommand(self.motors, 0x00)
             print("moving reverse")
         else:
@@ -206,7 +206,7 @@ class TangoBot:
 
     def moveForward(self):
         if(self.motors > 4500):
-            self.motors -= 500
+            self.motors -= 1000
             self.makeCommand(self.motors, 0x00)
             print("moving forward")
         else:

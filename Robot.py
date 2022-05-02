@@ -3,6 +3,7 @@ Final Project Class. Implements robot actions
 This class implements the robot and its possible actions, as well as managing user input
 """
 import random
+import sys, serial, time
 
 class Robot:
 

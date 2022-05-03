@@ -4,6 +4,7 @@ This class implements the robot and its possible actions, as well as managing us
 """
 import random
 import sys, serial, time
+import speech_recognition as sr
 
 class Robot:
 
@@ -26,9 +27,10 @@ class Robot:
     # prints the selection menu
     def menu(self):
         print("I can scout, rest, sharpen my weapon, or report")
-        return input("What should I do? \n")
+        print("What should I do?")
+        inp = self.bot.voiceInput()
+        return inp
 
-    
     # This method examines surrounding squares in the map and tells the user which ways are possible
     def scout(self, map):
         return self.getMovementChoice(map.getPossibleMoves())
@@ -344,4 +346,22 @@ class TangoBot:
         print('Writing')
         self.usb.write(cmd.encode())
         print('Reading')
+        
+    def voiceInput(self):
+        listening = True
+        while listening:
+            with sr.Microphone() as source:
+                r = sr.Recognizer()
+                r.adjust_for_ambient_noise(source)
+                r.dynamic_energythreshhold = 3000
+
+                try:
+                    print("Listening")
+                    audio = r.listen(source)
+                    print("Got Audio")
+                    self.message = r.recognize_google(audio)
+                    print(self.message)
+                    return self.message
+                except sr.UnknownValueError:
+                    print("Unknown Word")
 

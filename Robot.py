@@ -16,7 +16,7 @@ class Robot:
         self.key = False
         self.damage = 5
         self.turns = 0
-        self.allowedTurns = 15
+        self.allowedTurns = 25
         self.bot = TangoBot()
 
     # prints the selection menu

@@ -52,33 +52,42 @@ class Robot:
         self.damage += sharp
         self.turns += 1
         print(f"I sharpened my weapon for {sharp} damage, bringing my total to {self.damage} damage.\n")
+        self.bot.speak(f"I sharpened my weapon for {sharp} damage, bringing my total to {self.damage} damage.\n")
 
     # not implemented yet, might not be necessary
     def fightChoice(self, enemy, enemyHealth):
         print(f"I am fighting a {enemy}. It has {enemyHealth} health and I have {self.health} health.")
+        self.bot.speak(f"I am fighting a {enemy}. It has {enemyHealth} health and I have {self.health} health.")
         print("I can attack or retreat")
+        self.bot.speak("I can attack or retreat")
         choice = self.bot.voiceInput()
         while choice != "attack" and choice != "retreat":
             print("I can attack or retreat")
+            self.bot.speak("I can attack or retreat")
             choice = self.bot.voiceInput()
         return choice
 
     def retreat(self, map):
         print("inside retreat")
+        self.bot.speak("retreat")
         possMoves = map.getPossibleMoves()
         print(possMoves)
         choice = possMoves[random.randint(0, len(possMoves)-1)]
         print(choice)
+        self.bot.speak("retreating " + str(choice))
         self.move(choice, map)
 
 
     def getMovementChoice(self, possMovesArray):
         for i in possMovesArray:
             print("I can move {}".format(i))
+            self.bot.speak("I can move {}".format(i))
         print("Where should I go?")
+        self.bot.speak("Where should I go?")
         choice = self.bot.voiceInput()
         while choice not in possMovesArray:
             print("I can't move there. Try a different movement.")
+            self.bot.speak("I can't move there. Try a different movement.")
             choice = self.bot.voiceInput()
         return choice
 
@@ -109,6 +118,7 @@ class Robot:
     def evalTurns(self):
         if self.turns == self.allowedTurns:
             print("You took too long and died of starvation.")
+            self.bot.speak("Taking too long. Dying of Starvation.")
             exit()
 
 
@@ -118,6 +128,7 @@ class Robot:
         # update robot position on map
         if choice == "right":
             print("Moving Right")
+            self.bot.speak("Moving Right")
             robomap.moveRight()
             self.bot.turnRight()
             time.sleep(1)
@@ -128,6 +139,7 @@ class Robot:
             self.bot.turnLeft()
         elif choice == "left":
             print("Moving Left")
+            self.bot.speak("Moving Left")
             robomap.moveLeft()
             self.bot.turnLeft()
             time.sleep(1)
@@ -137,21 +149,19 @@ class Robot:
             time.sleep(1)
             self.bot.turnRight()
         elif choice == "up":
-            print("Moving up")
+            print("Moving Up")
+            self.bot.speak("Moving Up")
             robomap.moveUp()
             self.bot.moveForward()
             time.sleep(1)
             self.bot.stop()
         elif choice == "down":
             print("Moving Down")
+            self.bot.speak("Moving Down")
             robomap.moveDown()
             self.bot.moveReverse()
             time.sleep(1)
             self.bot.stop()
-        elif choice == "arm":
-            self.bot.moveArmUp()
-            time.sleep(1)
-            self.bot.moveArmDown()
         self.turns += 1
         
 

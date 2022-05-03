@@ -133,6 +133,7 @@ class TangoBot:
         self.headVert = 6000
         self.motors = 6000
         self.turn = 6000
+        self.arm = 6000
 
         self.message = "-1"
 
@@ -159,12 +160,24 @@ class TangoBot:
         self.headVert = 6000
         self.motors = 6000
         self.turn = 6000
+        self.arm = 6000
         self.makeCommand(self.headHorz, 0x03)
         self.makeCommand(self.headVert, 0x04)
         self.makeCommand(self.waist, 0x02)
         self.makeCommand(self.motors, 0x00)
         self.makeCommand(self.turn, 0x01)
+        self.makeCommand(self.arm, 0x05)
 
+    def moveArmUp(self):
+        pritn("Arm Up")
+        self.arm += 300
+        self.makeCommand(self.arm, 0x05)
+        
+    def moveArmDown(self):
+        print("Arm Down")
+        self.arm -= 300
+        self.makeCommand(self.arm, 0x05)
+        
     def moveReverse(self):
         if(self.motors < 7500):
             self.motors += 1000

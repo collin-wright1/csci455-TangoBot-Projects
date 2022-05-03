@@ -7,8 +7,8 @@ import sys, serial, time
 import speech_recognition as sr
 import pyttsx3
 
-from PySide6.QtWidgets import QApplication, QWidget, QLabel
-from PySide6.QtGui import QIcon, QMovie
+#from PySide6.QtWidgets import QApplication, QWidget, QLabel
+#from PySide6.QtGui import QIcon, QMovie
 
 class Robot:
 
@@ -28,10 +28,10 @@ class Robot:
         self.bot.moveForward()
         self.bot.stop()
         
-        app = QApplication([])
-        window = Window()
-        window.show()
-        sys.exit(app.exec())
+        #app = QApplication([])
+        #window = Window()
+        #window.show()
+        #sys.exit(app.exec())
 
     # prints the selection menu
     def menu(self):
@@ -399,15 +399,15 @@ class TangoBot:
         self.engine.say(inp)
         self.engine.runAndWait()
 
-class Window(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setGeometry(100, 100, 500, 300)
-        self.setWindowTitle("Python Gif Window")
-        self.setWindowIcon(QIcon('icons/qt.png'))
-        
-        label = QLabel(self)
-        movie = Qmovie('adventure.gif')
-        label.setMovie(movie)
-        movie.start()
+#class Window(QWidget):
+#    def __init__(self):
+#        super().__init__()
+#        self.setGeometry(100, 100, 500, 300)
+#        self.setWindowTitle("Python Gif Window")
+#        self.setWindowIcon(QIcon('icons/qt.png'))
+#        
+#        label = QLabel(self)
+#        movie = Qmovie('adventure.gif')
+#        label.setMovie(movie)
+#        movie.start()
        

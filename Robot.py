@@ -73,7 +73,8 @@ class Robot:
         print("Where should I go?")
         choice = self.bot.voiceInput()
         while choice not in possMovesArray:
-            choice = input("I can't move there. Try a different movement.\n") # TODO: might not be working correctly
+            print("I can't move there. Try a different movement.")
+            choice = self.bot.voiceInput()
         return choice
 
     def takeDamage(self, damage):

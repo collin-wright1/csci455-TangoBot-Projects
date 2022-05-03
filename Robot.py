@@ -55,7 +55,8 @@ class Robot:
         print("I can attack or retreat")
         choice = self.bot.voiceInput()
         while choice != "attack" and choice != "retreat":
-            choice = input("I can attack or retreat\n")
+            print("I can attack or retreat")
+            choice = self.bot.voiceInput()
         return choice
 
     def retreat(self, map):

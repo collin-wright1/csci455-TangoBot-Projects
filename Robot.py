@@ -79,64 +79,29 @@ class Robot:
         # update robot position on map
         if choice == "right":
             robomap.moveRight()
-            time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
-            self.bot.stop()
             self.bot.turnRight()
-            time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
-            self.bot.stop()
             time.sleep(1)
             self.bot.moveForward()
             time.sleep(1)
             self.bot.stop()
             time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
             self.bot.turnLeft()
-            time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
-            self.bot.stop()
         elif choice == "left":
             robomap.moveLeft()
-            self.bot.stop()
-            time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
             self.bot.turnLeft()
             time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
             self.bot.moveForward()
-            self.bot.stop()
             time.sleep(1)
             self.bot.stop()
             time.sleep(1)
             self.bot.turnRight()
-            self.bot.stop()
-            time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
         elif choice == "up":
             robomap.moveUp()
-            self.bot.stop()
-            time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
             self.bot.moveForward()
             time.sleep(1)
             self.bot.stop()
         elif choice == "down":
             robomap.moveDown()
-            self.bot.stop()
-            time.sleep(1)
-            self.bot.stop()
-            time.sleep(1)
             self.bot.moveReverse()
             time.sleep(1)
             self.bot.stop()
@@ -218,28 +183,21 @@ class TangoBot:
 
     def turnLeft(self):
         print('turning left')
-#        self.motors = 6000
-#        self.makeCommand(self.motors, 0x00)
         self.turn += 1300
         self.makeCommand(self.turn, 0x01)
         self.turn = 6000
-#        time.sleep(1)
-#        for i in range(3):
-#            self.moveReverse(key)
-#        for i in range(3):
-#            self.moveForward(key)
+        time.sleep(1)
+        self.motors = 6000
+        self.makeCommand(self.motors, 0x00)
 
     def turnRight(self):
         print('turning right')
-#        self.motors = 6000
-#        self.makeCommand(self.motors, 0x00)
         self.turn -= 1300
         self.makeCommand(self.turn, 0x01)
         self.turn = 6000
-#        for i in range(3):
-#            self.moveReverse(key)
-#        for i in range(3):
-#            self.moveForward(key)
+        time.sleep(1)
+        self.motors = 6000
+        self.makeCommand(self.motors, 0x00)
 
     def stop(self):
         print("stopping")

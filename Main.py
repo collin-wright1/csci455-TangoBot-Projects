@@ -21,3 +21,4 @@ if __name__ == "__main__":
             robot.sharpen()
         else:
             print("I don't understand.")
+        robot.evalTurns()

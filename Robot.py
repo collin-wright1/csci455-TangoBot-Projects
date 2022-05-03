@@ -16,6 +16,7 @@ class Robot:
         self.key = False
         self.damage = 5
         self.turns = 0
+        self.allowedTurns = 15
         self.bot = TangoBot()
 
     # prints the selection menu
@@ -90,6 +91,12 @@ class Robot:
 
     def getTurns(self):
         return self.turns
+
+    def evalTurns(self):
+        if self.turns == self.allowedTurns:
+            print("You took too long and died of starvation.")
+            exit()
+
 
 
     # executes the actual move on the map

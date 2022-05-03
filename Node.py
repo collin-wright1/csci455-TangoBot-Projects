@@ -101,6 +101,15 @@ class FightNode(Node):
                 else:
                     print("You have been killed")
                     print("Game Over")
+                    robot.bot.moveHeadDown()
+                    time.sleep(1)
+                    robot.bot.moveHeadDown()
+                    time.sleep(1)
+                    robot.bot.moveHeadDown()
+                    time.sleep(1)
+                    robot.bot.moveHeadDown()
+                    time.sleep(1)
+                    robot.bot.moveHeadDown()
                     exit()
         else:
             print(f"The scars of battle remain here, but the {self.enemy} has been long vanquished")

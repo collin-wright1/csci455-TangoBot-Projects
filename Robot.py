@@ -195,7 +195,7 @@ class TangoBot:
         self.makeCommand(self.arm, 0x05)
 
     def moveArmUp(self):
-        pritn("Arm Up")
+        print("Arm Up")
         self.arm += 300
         self.makeCommand(self.arm, 0x05)
         

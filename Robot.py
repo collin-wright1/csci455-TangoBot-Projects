@@ -187,7 +187,7 @@ class TangoBot:
         
         self.engine = pyttsx3.init()
         voice_num = 2
-        voices = engine.getProperty('voices')
+        voices = self.engine.getProperty('voices')
         self.engine.setProperty('voice', voices[voice_num].id)
 
         try:

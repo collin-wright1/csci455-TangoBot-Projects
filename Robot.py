@@ -44,7 +44,7 @@ class Robot:
         self.health += heal
         self.turns += 1
         print(f"I healed for {heal} hp, bringing my total to {self.health}.\n")
-        self.bot.speak("I healed for " + str(heal) + " hp, bringing my total to " + str(self.health)")
+        self.bot.speak("I healed for " + str(heal) + " hp, bringing my total to " + str(self.health))
     
     # This method works like rest but improves the current weapon
     def sharpen(self):

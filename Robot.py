@@ -360,7 +360,7 @@ class TangoBot:
                     audio = r.listen(source)
                     print("Got Audio")
                     self.message = r.recognize_google(audio)
-                    print(self.message)
+                    print(self.message.lower())
                     return self.message
                 except sr.UnknownValueError:
                     print("Unknown Word")

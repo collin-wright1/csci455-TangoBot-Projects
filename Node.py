@@ -3,6 +3,7 @@ Final Project Class. Implements the nodes and their affects on the robot.
 This class creates the different node types that are stored within the map and defines their interactions with the robot
 """
 import random
+import time
 
 class Node:
     start = False
@@ -77,6 +78,10 @@ class FightNode(Node):
                 if robot.getHealth() > 0: # if robot alive
                     choice = robot.fightChoice(self.enemy, self.enemyHealth)
                     if choice == "attack":
+                        print("ATTACK!!!!")
+                        robot.bot.moveArmUp()
+                        time.sleep(1)
+                        robot.bot.moveArmDown()
                         self.enemyHealth -= robot.getDamage()
                         if self.enemyHealth <= 0:
                             self.enemyKilled()

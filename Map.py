@@ -37,7 +37,7 @@ class Map:
         for x in range(0, 5):
             row = "[ "
             for y in range (0, 5):
-                row += str(self.navMap[x][y])
+                row += str(self.navMap[y][x])
             row += " ]\n"   
             total += row
         return total

@@ -39,9 +39,11 @@ class Node:
     def checkEnd(self, robot):
         if self.end and robot.getKey():
             print("You won!")
+            robot.bot.speak("Victory!")
             exit()
         elif self.end:
             print("This is the exit, but I don't have a key")
+            robot.bot.speak("This is the exit, but I don't have a key.")
 
 class EmptyNode(Node):
 
@@ -54,8 +56,10 @@ class EmptyNode(Node):
         if self.encountered == False:
             self.encountered = True
             print("There's nothing here")
+            robot.bot.speak("There's nothing here.")
         else:
             print("You've already been here")
+            robot.bot.speak("We've already been here")
 
 # TODO: I have not added a fight node to the map so this has not been tested.
 class FightNode(Node):
@@ -79,6 +83,7 @@ class FightNode(Node):
                     choice = robot.fightChoice(self.enemy, self.enemyHealth)
                     if choice == "attack":
                         print("ATTACK!!!!")
+                        robot.bot.speak("Pinch Attack Go!")
                         robot.bot.moveArmUp()
                         time.sleep(1)
                         robot.bot.pinch()
@@ -91,16 +96,21 @@ class FightNode(Node):
                             self.enemyTurn(robot)
                     elif choice == "retreat": # TODO: Add retreat condition
                         print("Attempting retreat\n")
+                        robot.bot.speak("Run away!")
                         if random.random() <= 0.75:
                             print("Retreat Successful")
+                            robot.bot.speak("Retreat Successful")
                             robot.retreat(map)
                             break
                         else:
                             print("Could not escape")
+                            robot.bot.speak("I couldn't get away.")
                             self.enemyTurn(robot)
                 else:
                     print("You have been killed")
+                    robot.bot.speak("I don't feel so good.")
                     print("Game Over")
+                    robot.bot.speak("Game over.")
                     robot.bot.moveHeadDown()
                     time.sleep(1)
                     robot.bot.moveHeadDown()
@@ -113,6 +123,7 @@ class FightNode(Node):
                     exit()
         else:
             print(f"The scars of battle remain here, but the {self.enemy} has been long vanquished")
+            robot.bot.speak("The scars of battle remain here, but the enemy has been long vanquished")
         
 
     # subtract enemy attack from robot health
@@ -120,6 +131,7 @@ class FightNode(Node):
         robot.takeDamage(self.enemyAttack)
         robot.bot.moveWaistLeft()
         print("OUCH! Damage Taken")
+        robot.bot.speak("Ouch! I've been hit.")
         time.sleep(1)
         robot.bot.moveWaistRight()
 
@@ -127,6 +139,7 @@ class FightNode(Node):
     def enemyKilled(self):
         self.enemyAlive = False
         print("enemy killed")
+        robot.bot.speak("Enemy Vanquished.")
 
 # TODO: needs to be implemented. Should replace the robots equiped weapon with something better. Select randomly from a list like the enemy node.
 # One of these should also have a key. Or we could make it drop from a monster?
@@ -141,9 +154,11 @@ class ItemNode(Node):
         if self.encountered == False:
             self.encountered = True
             print("I found a key!")
+            robot.bot.speak("I found a Key!")
             robot.setKey(True)
         else:
             print("You've already been here")
+            robot.bot.speak("We've already been here.")
 
 # Heals robot to full health one time. 
 class HealthNode(Node):
@@ -158,6 +173,9 @@ class HealthNode(Node):
             self.encountered = True
             if robot.getHealth() < 80:
                 print("Found a health node. Health restored to 80")
+                robot.bot.speak("I found a spring. Health has been restored.")
                 robot.setHealth(80)
         else:
             print("You've already been here")
+            robot.bot.speak("We've already been here.")
+            

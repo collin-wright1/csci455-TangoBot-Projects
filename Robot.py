@@ -18,6 +18,8 @@ class Robot:
         self.turns = 0
         self.allowedTurns = 25
         self.bot = TangoBot()
+        self.bot.moveHeadUp()
+        time.sleep(1)
         self.bot.moveForward()
         self.bot.stop()
 

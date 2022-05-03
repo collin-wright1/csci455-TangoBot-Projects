@@ -3,6 +3,7 @@ Final Project Class. Implements the nodes and their affects on the robot.
 This class creates the different node types that are stored within the map and defines their interactions with the robot
 """
 import random
+import time
 
 class Node:
     start = False

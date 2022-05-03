@@ -5,6 +5,7 @@ This class implements the robot and its possible actions, as well as managing us
 import random
 import sys, serial, time
 import speech_recognition as sr
+import pyttsx3
 
 class Robot:
 
@@ -27,7 +28,9 @@ class Robot:
     # prints the selection menu
     def menu(self):
         print("I can move, rest, sharpen my weapon, or report")
+        self.bot.speak("I can move, rest, sharpen my weapon, or report")
         print("What should I do?")
+        self.bot.speak("What should I do?")
         inp = self.bot.voiceInput()
         return inp
 
@@ -41,6 +44,7 @@ class Robot:
         self.health += heal
         self.turns += 1
         print(f"I healed for {heal} hp, bringing my total to {self.health}.\n")
+        self.bot.speak(f"I healed for {heal} hp, bringing my total to {self.health}.\n")
     
     # This method works like rest but improves the current weapon
     def sharpen(self):
@@ -180,6 +184,11 @@ class TangoBot:
         self.fingers = 6000
 
         self.message = "-1"
+        
+        self.engine = pyttsx3.init()
+        voice_num = 2
+        voices = engine.getProperty('voices')
+        self.engine.setProperty('voice', voices[voice_num].id)
 
         try:
             self.usb = serial.Serial('/dev/ttyACM0')
@@ -368,4 +377,8 @@ class TangoBot:
                     return self.message
                 except sr.UnknownValueError:
                     print("Unknown Word")
+                    
+    def speak(self, inp):
+        self.engine.say(inp)
+        self.engine.runAndWait()
 

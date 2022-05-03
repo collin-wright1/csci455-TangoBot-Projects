@@ -74,7 +74,6 @@ class Robot:
         print(possMoves)
         choice = possMoves[random.randint(0, len(possMoves)-1)]
         print(choice)
-        self.bot.speak("retreating " + str(choice))
         self.move(choice, map)
 
 

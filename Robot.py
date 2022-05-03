@@ -69,7 +69,8 @@ class Robot:
     def getMovementChoice(self, possMovesArray):
         for i in possMovesArray:
             print("I can move {}".format(i))
-        choice = input("Where should I go?\n")
+        print("Where should I go?")
+        choice = self.bot.voiceInput()
         while choice not in possMovesArray:
             choice = input("I can't move there. Try a different movement.\n") # TODO: might not be working correctly
         return choice

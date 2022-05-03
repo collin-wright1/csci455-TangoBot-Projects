@@ -105,6 +105,10 @@ class Robot:
             self.bot.moveReverse()
             time.sleep(1)
             self.bot.stop()
+        elif choice == "arm":
+            self.bot.moveArmUp()
+            time.sleep(1)
+            self.bot.moveArmDown()
         self.turns += 1
         
 

@@ -109,6 +109,10 @@ class FightNode(Node):
     # subtract enemy attack from robot health
     def enemyTurn(self, robot):
         robot.takeDamage(self.enemyAttack)
+        robot.bot.moveWaistLeft()
+        print("OUCH! Damage Taken")
+        time.sleep(1)
+        robot.bot.moveWaistRight()
 
     # changes node type to empty once enemy is killed
     def enemyKilled(self):

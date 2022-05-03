@@ -18,6 +18,8 @@ class Robot:
         self.turns = 0
         self.allowedTurns = 25
         self.bot = TangoBot()
+        self.bot.moveForward()
+        self.bot.stop()
 
     # prints the selection menu
     def menu(self):
@@ -208,11 +210,17 @@ class TangoBot:
         print("Arm Up")
         self.arm += 5000
         self.makeCommand(self.arm, 0x09)
+        time.sleep(1)
+        self.motors = 6000
+        self.makeCommand(self.motors, 0x00)
         
     def moveArmDown(self):
         print("Arm Down")
         self.arm -= 5000
         self.makeCommand(self.arm, 0x09)
+        time.sleep(1)
+        self.motors = 6000
+        self.makeCommand(self.motors, 0x00)
         
     def pinch(self):
         print("Pinching")
@@ -221,6 +229,9 @@ class TangoBot:
         time.sleep(1)
         self.fingers -= 1000
         self.makeCommand(self.fingers, 0x06)
+        time.sleep(1)
+        self.motors = 6000
+        self.makeCommand(self.motors, 0x00)
         
     def moveReverse(self):
         if(self.motors < 7500):

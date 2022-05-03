@@ -11,10 +11,10 @@ class Robot:
     # TODO: need to add a condition to check if total moves are greater than some amount, if so the game is lost.
 
     def __init__(self):
-        self.health = 200
+        self.health = 80
         self.weapon = "basic sword"
         self.key = False
-        self.damage = 10
+        self.damage = 5
         self.turns = 0
         self.bot = TangoBot()
 
@@ -43,16 +43,28 @@ class Robot:
         print(f"I sharpened my weapon for {sharp} damage, bringing my total to {self.damage} damage.\n")
 
     # not implemented yet, might not be necessary
-    def fightChoice(self, type):
-        if type == "fight":
-            return self.ask(["fight", "retreat"])
+    def fightChoice(self, enemy, enemyHealth):
+        print(f"I am fighting a {enemy}. It has {enemyHealth} health and I have {self.health} health.")
+        choice = input("I can attack or retreat\n")
+        while choice != "attack" and choice != "retreat":
+            choice = input("I can attack or retreat\n")
+        return choice
+
+    def retreat(self, map):
+        print("inside retreat")
+        possMoves = map.getPossibleMoves()
+        print(possMoves)
+        choice = possMoves[random.randint(0, len(possMoves)-1)]
+        print(choice)
+        self.move(choice, map)
+
 
     def getMovementChoice(self, possMovesArray):
         for i in possMovesArray:
             print("I can move {}".format(i))
         choice = input("Where should I go?\n")
-        if choice not in possMovesArray and not "exit":
-            choice = input("I can't do move there. Try a different movement.\n ") # TODO: might not be working correctly
+        while choice not in possMovesArray:
+            choice = input("I can't move there. Try a different movement.\n") # TODO: might not be working correctly
         return choice
 
     def takeDamage(self, damage):
@@ -61,11 +73,17 @@ class Robot:
     def getHealth(self):
         return self.health
     
+    def setHealth(self, inhealth):
+        self.health = inhealth
+    
     def getWeapon(self):
         return self.weapon
     
     def getKey(self):
         return self.key
+
+    def setKey(self, bool):
+        self.key = bool
 
     def getDamage(self):
         return self.damage
@@ -78,6 +96,7 @@ class Robot:
     def move(self, choice, robomap):
         # update robot position on map
         if choice == "right":
+            print("Moving Right")
             robomap.moveRight()
             self.bot.turnRight()
             time.sleep(1)
@@ -87,6 +106,7 @@ class Robot:
             time.sleep(1)
             self.bot.turnLeft()
         elif choice == "left":
+            print("Moving Left")
             robomap.moveLeft()
             self.bot.turnLeft()
             time.sleep(1)
@@ -96,11 +116,13 @@ class Robot:
             time.sleep(1)
             self.bot.turnRight()
         elif choice == "up":
+            print("Moving up")
             robomap.moveUp()
             self.bot.moveForward()
             time.sleep(1)
             self.bot.stop()
         elif choice == "down":
+            print("Moving Down")
             robomap.moveDown()
             self.bot.moveReverse()
             time.sleep(1)

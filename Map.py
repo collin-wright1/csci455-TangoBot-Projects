@@ -2,7 +2,7 @@
 Final Project Class. Imports the Node class
 This class contains the map which the robot will navigate.
 """
-from Node import EmptyNode, Node
+from Node import EmptyNode, FightNode, ItemNode, HealthNode, Node
 
 class Map:
 
@@ -10,10 +10,12 @@ class Map:
     def __init__(self):
         self.navMap = [[ Node() for x in range(0,5)] for y in range(0,5)]
         self.navMap[2][0] = EmptyNode() # Adding nodes. Specify the coordinate and then create a node in that position on the navmap.
-        self.navMap[2][1] = EmptyNode()
+        self.navMap[2][0].setStart(True)
+        self.navMap[2][1] = FightNode()
         self.navMap[2][2] = EmptyNode()
-        self.navMap[2][3] = EmptyNode()
+        self.navMap[2][3] = HealthNode()
         self.navMap[2][4] = EmptyNode()
+        self.navMap[2][4].setEnd(True)
         self.navMap[0][2] = EmptyNode()
         self.navMap[1][2] = EmptyNode()
         self.navMap[3][2] = EmptyNode()
@@ -53,7 +55,12 @@ class Map:
         x = self.robotX
         y = self.robotY
         # TODO: check the type of node and pass in the robot if necessary (when it's a heal, an item, or a fight).
-        self.navMap[x][y].performAction(robot)
+        self.navMap[x][y].performAction(self, robot)
+
+    def checkEnd(self, robot):
+        x = self.robotX
+        y = self.robotY
+        self.navMap[x][y].checkEnd(robot)
 
     # evaluates where the robot can move to.
     def getPossibleMoves(self):

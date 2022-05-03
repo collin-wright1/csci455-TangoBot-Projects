@@ -44,7 +44,7 @@ class Robot:
         self.health += heal
         self.turns += 1
         print(f"I healed for {heal} hp, bringing my total to {self.health}.\n")
-        self.bot.speak("I healed for " + str(heal) + " hp, bringing my total to " + str(self.health))
+        self.bot.speak("I feel refreshed.")
     
     # This method works like rest but improves the current weapon
     def sharpen(self):
@@ -52,7 +52,7 @@ class Robot:
         self.damage += sharp
         self.turns += 1
         print(f"I sharpened my weapon for {sharp} damage, bringing my total to {self.damage} damage.\n")
-        self.bot.speak("I sharpened my weapon for " + str(sharp) + " damage, bringing my total to " + str(self.damage) + " damage.")
+        self.bot.speak("I feel invigorated.")
 
     # not implemented yet, might not be necessary
     def fightChoice(self, enemy, enemyHealth):

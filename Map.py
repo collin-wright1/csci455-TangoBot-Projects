@@ -9,20 +9,27 @@ class Map:
     # TODO: Map coordinates are kinda messed up, I think x and y needs to be reversed.
     def __init__(self):
         self.navMap = [[ Node() for x in range(0,5)] for y in range(0,5)]
-        self.navMap[2][0] = EmptyNode() # Adding nodes. Specify the coordinate and then create a node in that position on the navmap.
-        self.navMap[2][0].setStart(True)
-        self.navMap[2][1] = FightNode()
-        self.navMap[2][2] = EmptyNode()
-        self.navMap[2][3] = HealthNode()
-        self.navMap[2][4] = EmptyNode()
-        self.navMap[2][4].setEnd(True)
-        self.navMap[0][2] = EmptyNode()
+        self.navMap[0][0] = ItemNode() # Adding nodes. Specify the coordinate and then create a node in that position on the navmap.
+        self.navMap[0][1] = EmptyNode()
+        self.navMap[0][2] = FightNode()
+        self.navMap[0][4] = EmptyNode()
+        self.navMap[0][4].setStart(True)
+        self.navMap[1][4] = EmptyNode()
         self.navMap[1][2] = EmptyNode()
-        self.navMap[3][2] = EmptyNode()
-        self.navMap[4][2] = EmptyNode()
-        self.robotX = 2
-        self.robotY = 0
-        # TODO: Randomly set start and end node on accessible node.
+        self.navMap[2][4] = FightNode()
+        self.navMap[2][3] = EmptyNode()
+        self.navMap[2][2] = HealNode()
+        self.navMap[2][1] = EmptyNode()
+        self.navMap[2][0] = FightNode()
+        self.navMap[3][4] = EmptyNode()
+        self.navMap[3][0] = EmptyNode()
+        self.navMap[4][4] = FightNode()
+        self.navMap[4][3] = EmptyNode()
+        self.navMap[4][2] = HealNode()
+        self.navMap[4][0] = EmptyNode()
+        self.navMap[4][0].setEnd(True)
+        self.robotX = 0
+        self.robotY = 4
 
     # Tostring for the map printout
     def __str__(self):

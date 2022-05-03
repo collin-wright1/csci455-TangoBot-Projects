@@ -8,6 +8,7 @@ if __name__ == "__main__":
     robot = Robot()
     while choice != "exit":
         nmap.induceAction(robot)
+        nmap.checkEnd(robot)
         choice = robot.menu()
         if choice == "scout":
             move = robot.scout(nmap)

@@ -57,7 +57,7 @@ class Robot:
     # not implemented yet, might not be necessary
     def fightChoice(self, enemy, enemyHealth):
         print(f"I am fighting a {enemy}. It has {enemyHealth} health and I have {self.health} health.")
-        self.bot.speak("I am fighting a " + str(enemy) + ". It has " + str(enemyHealth) + " health and I have " + str(self.health) + " health.")
+        self.bot.speak("I am fighting a " + str(enemy))
         print("I can attack or retreat")
         self.bot.speak("I can attack or retreat")
         choice = self.bot.voiceInput()

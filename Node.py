@@ -92,6 +92,7 @@ class FightNode(Node):
                         self.enemyHealth -= robot.getDamage()
                         if self.enemyHealth <= 0:
                             self.enemyKilled()
+                            robot.bot.speak("Enemy Vanquished.")
                         else:
                             self.enemyTurn(robot)
                     elif choice == "retreat": # TODO: Add retreat condition
@@ -139,7 +140,6 @@ class FightNode(Node):
     def enemyKilled(self):
         self.enemyAlive = False
         print("enemy killed")
-        robot.bot.speak("Enemy Vanquished.")
 
 # TODO: needs to be implemented. Should replace the robots equiped weapon with something better. Select randomly from a list like the enemy node.
 # One of these should also have a key. Or we could make it drop from a monster?

@@ -287,6 +287,9 @@ class TangoBot:
             print("swiveling left")
         else:
             print("max swivel")
+        time.sleep(1)
+        self.motors = 6000
+        self.makeCommand(self.motors, 0x00)
 
     def moveWaistRight(self):
         if(self.waist > 3000):
@@ -295,6 +298,9 @@ class TangoBot:
             print("swiveling right")
         else:
             print("max swivel")
+        time.sleep(1)
+        self.motors = 6000
+        self.makeCommand(self.motors, 0x00)
 
     def moveHeadRight(self):
         if(self.headHorz > 5000):

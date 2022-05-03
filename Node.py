@@ -81,6 +81,8 @@ class FightNode(Node):
                         print("ATTACK!!!!")
                         robot.bot.moveArmUp()
                         time.sleep(1)
+                        robot.bot.pinch()
+                        time.sleep(1)
                         robot.bot.moveArmDown()
                         self.enemyHealth -= robot.getDamage()
                         if self.enemyHealth <= 0:

@@ -77,6 +77,10 @@ class FightNode(Node):
                 if robot.getHealth() > 0: # if robot alive
                     choice = robot.fightChoice(self.enemy, self.enemyHealth)
                     if choice == "attack":
+                        print("ATTACK!!!!")
+                        robot.bot.moveArmUp()
+                        time.sleep(1)
+                        robot.bot.moveArmDown()
                         self.enemyHealth -= robot.getDamage()
                         if self.enemyHealth <= 0:
                             self.enemyKilled()

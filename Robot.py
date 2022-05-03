@@ -26,7 +26,7 @@ class Robot:
 
     # prints the selection menu
     def menu(self):
-        print("I can scout, rest, sharpen my weapon, or report")
+        print("I can move, rest, sharpen my weapon, or report")
         print("What should I do?")
         inp = self.bot.voiceInput()
         return inp
